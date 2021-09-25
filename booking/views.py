@@ -4,4 +4,7 @@ from django.shortcuts import render
 
 
 def home(request):
-    return render(request, 'booking/home.html')
+    return render(request, 'booking/home.html', context={
+        'user_name': 'Steve',
+        'available_rooms': [101, 102, 103, 104]
+    })
