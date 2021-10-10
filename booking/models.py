@@ -16,3 +16,24 @@ class Room(models.Model):
 
     def __str__(self):
         return f'Room#{self.room_num}'
+
+
+class Guest(models.Model):
+    MR = 'MR'
+    MS = 'MS'
+    DR = 'DR'
+    OT = 'OT'
+    HONORIFIC_CHOICES = [
+        (MR, 'Mr.'),
+        (MS, 'Ms.'),
+        (DR, 'Dr.'),
+        (OT, 'Other')
+    ]
+    honorific = models.CharField(max_length=2, choices=HONORIFIC_CHOICES, default=OT)
+    first = models.CharField(max_length=100, default='')
+    last = models.CharField(max_length=100, default='')
+    vip = models.IntegerField(default=-1)
+    email = models.CharField(max_length=100, default='')
+
+    def __str__(self):
+        return f'{self.first} {self.last}'
