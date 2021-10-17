@@ -37,3 +37,33 @@ class Guest(models.Model):
 
     def __str__(self):
         return f'{self.first} {self.last}'
+
+    @staticmethod
+    def get_absolute_url():
+        return '/guestlist'
+
+
+class Employee(models.Model):
+    CON = 'CON'
+    BH = 'BH'
+    KIT = 'KIT'
+    CUS = 'CUS'
+    POSITION_CHOICES = [
+        (CON, 'Concierge'),
+        (BH, 'Bellhop'),
+        (KIT, 'Kitchen'),
+        (CUS, 'Custodial')
+    ]
+    first = models.CharField(max_length=100, default='')
+    last = models.CharField(max_length=100, default='')
+    position = models.CharField(max_length=3, choices=POSITION_CHOICES, default=CON)
+    ssn = models.CharField(max_length=12, default='')
+    hourly_rate = models.FloatField(default=12.5)
+    hire_date = models.DateField()
+
+    def __str__(self):
+        return f'{self.last}-{self.id}'
+
+    @staticmethod
+    def get_absolute_url():
+        return '/employeelist'

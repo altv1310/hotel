@@ -1,0 +1,20 @@
+
+{% extends "./layout.html" %}
+{% block content %}
+    <a href={% url 'employee_create' %}><button>Add Employee</button></a>
+    <table>
+    <tr><th>First Name</th><th>Last Name</th><th>Position</th><th>SSN</th><th>Hourly Rate</th><th>Hire Date</th><th></th><th></th></tr>
+    {% for employee in employee_list %}
+        <tr>
+            <td>{{ employee.first }}</td>
+            <td>{{ employee.last }}</td>
+            <td>{{ employee.get_position_display }}</td>
+            <td>{{ employee.ssn }}</td>
+            <td>{{ employee.hourly_rate }}</td>
+            <td>{{ employee.hire_date }}</td>
+            <td><a href={% url 'employee_update' employee.id %}><button>Update</button></a></td>
+            <td><a href={% url 'employee_delete' employee.id %}><button>Delete</button></a></td>
+        </tr>
+    {% endfor %}
+    </table>
+{% endblock %}
