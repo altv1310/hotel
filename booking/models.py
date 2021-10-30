@@ -67,3 +67,15 @@ class Employee(models.Model):
     @staticmethod
     def get_absolute_url():
         return '/employeelist'
+
+
+class Stay(models.Model):
+    roomid = models.ForeignKey(Room, on_delete=models.CASCADE)
+    guestid = models.ForeignKey(Guest, on_delete=models.CASCADE)
+    empid = models.ForeignKey(Employee, on_delete=models.CASCADE)
+    start = models.DateField(auto_now=False, auto_now_add=False)
+    end = models.DateField(auto_now=False, auto_now_add=False)
+    timestamp = models.DateField(auto_now_add=True)
+
+    def __str__(self):
+        return f'{self.guestid.last} staying in {self.roomid.room_num} from {self.start} until {self.end}'

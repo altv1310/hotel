@@ -1,10 +1,17 @@
 from django.shortcuts import render
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
-from .models import Room, Guest, Employee
-from .forms import GuestCreateForm, GuestUpdateForm, EmployeeCreateForm, EmployeeUpdateForm
+from .models import Room, Guest, Employee, Stay
+from .forms import GuestCreateForm, GuestUpdateForm, EmployeeCreateForm, EmployeeUpdateForm, StayCreateForm
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 ROOMS = [101, 102, 103, 104]
+
+
+class StayCreate(CreateView):
+    model = Stay
+    template_name = 'booking/stay_create_form.html'
+    form_class = StayCreateForm
 
 
 class GuestCreate(CreateView):
@@ -60,3 +67,8 @@ def home(request):
         'user_name': 'Steve',
         'available_rooms': ROOMS
     })
+
+
+@login_required
+def about(request):
+    return render(request, 'booking/about.html')
